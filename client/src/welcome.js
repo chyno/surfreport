@@ -7,10 +7,10 @@ export class Welcome{
   heading = 'Chyno Surf Reqport Page';
   city = 'Arlington';
   speed = '12';
-  direction = 'SW';
+  direction = 'NW';
   reading = '4/4/2015';
 
-  url = 'http://localhost:3000/api/readings';
+  url = '/api/readings';
 
   constructor(http){
     this.http = http;
@@ -28,17 +28,17 @@ export class Welcome{
   }
 
   canDeactivate() {
-   retun true;
+   return true;
     }
-  }
-  activate(){
+  
+  activate() {
    
     return this.http.get(this.url).then(response => {
        
-      city = response.content[0].city;
-      speed = response.content[0].speed;
-      direction = response.content[0].direction;
-      reading = response.content[0].reading;
+      this.city = response.content[0].city;
+      this.speed = response.content[0].speed;
+      this.direction = response.content[0].direction;
+      this.reading = response.content[0].reading;
 
       //this.lastName = response.content[0].lastName;
     });
