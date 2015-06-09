@@ -1,38 +1,31 @@
 <template>
   <section class="au-animate">
     <h2>${heading}</h2>
+    <form role="form">
+    
+     <div class="form-group">
+        <label for="sp">Wind Speed: </label>
+        <span class="label label-primary">${speed}</span> 
+      </div>
 
-    <form role="form" submit.delegate="submit()">
-      <div class="form-group">
-        <label for="city">City</label>
-        <input type="text" value.bind="city" 
-        class="form-control" id="city" placeholder="city">
-      </div>
-      <div class="form-group">
-        <label for="sp">Wind Speed</label>
-        <input type="text" value.bind="speed" 
-        class="form-control" id="sp" placeholder="speed">
-      </div>
 
       <div class="form-group">
         <label for="dr">Direction</label>
-        <input type="text" value.bind="direction" 
-        class="form-control" id="dr" placeholder="direction">
+        <span class="label label-default">${direction}</span>
+        
       </div>
 
       <div class="form-group">
-        <label for="dt">Reading Tacken</label>
-        <input type="text" value.bind="reading" 
-        class="form-control" id="dt" placeholder="direction">
+        <label for="city">City: </label>
+        <span class="label label-default">${city}</span>
+        
       </div>
 
-
-
-     
-        <label>Full Name</label>
-        <p class="help-block">${fullName | upper}</p>
+      <div class="form-group">
+        <label for="dt">Reading Tacken: </label> 
+        <span   class="label label-default"
+          id="dt" placeholder="reading" >${reading}</span>
       </div>
-      <button type="submit" class="btn btn-default">Submit</button>
     </form>
   </section>
 </template>
