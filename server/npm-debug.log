@@ -1,0 +1,74 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'c:\\PROGRAM FILES\\NODEJS\\node.exe',
+1 verbose cli   'c:\\PROGRAM FILES\\NODEJS\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   'documentdb',
+1 verbose cli   '--save' ]
+2 info using npm@1.4.21
+3 info using node@v0.10.30
+4 warn package.json server@1.0.0 No description
+5 warn package.json server@1.0.0 No repository field.
+6 warn package.json server@1.0.0 No README data
+7 verbose readDependencies using package.json deps
+8 verbose cache add [ 'documentdb', null ]
+9 verbose cache add name=undefined spec="documentdb" args=["documentdb",null]
+10 verbose parsed url { protocol: null,
+10 verbose parsed url   slashes: null,
+10 verbose parsed url   auth: null,
+10 verbose parsed url   host: null,
+10 verbose parsed url   port: null,
+10 verbose parsed url   hostname: null,
+10 verbose parsed url   hash: null,
+10 verbose parsed url   search: null,
+10 verbose parsed url   query: null,
+10 verbose parsed url   pathname: 'documentdb',
+10 verbose parsed url   path: 'documentdb',
+10 verbose parsed url   href: 'documentdb' }
+11 silly lockFile 62f1b200-documentdb documentdb
+12 verbose lock documentdb C:\Users\jxc14\AppData\Roaming\npm-cache\62f1b200-documentdb.lock
+13 silly lockFile 62f1b200-documentdb documentdb
+14 silly lockFile 62f1b200-documentdb documentdb
+15 verbose addNamed [ 'documentdb', '' ]
+16 verbose addNamed [ null, '*' ]
+17 silly lockFile dc8cfd67-documentdb documentdb@
+18 verbose lock documentdb@ C:\Users\jxc14\AppData\Roaming\npm-cache\dc8cfd67-documentdb.lock
+19 silly addNameRange { name: 'documentdb', range: '*', hasData: false }
+20 verbose request where is /documentdb
+21 verbose request registry https://registry.npmjs.org/
+22 verbose request id 55de5d8edcb3d663
+23 verbose url raw /documentdb
+24 verbose url resolving [ 'https://registry.npmjs.org/', './documentdb' ]
+25 verbose url resolved https://registry.npmjs.org/documentdb
+26 verbose request where is https://registry.npmjs.org/documentdb
+27 info trying registry request attempt 1 at 15:17:59
+28 http GET https://registry.npmjs.org/documentdb
+29 info retry will retry, error on last attempt: Error: CERT_UNTRUSTED
+30 info trying registry request attempt 2 at 15:18:09
+31 http GET https://registry.npmjs.org/documentdb
+32 info retry will retry, error on last attempt: Error: CERT_UNTRUSTED
+33 info trying registry request attempt 3 at 15:19:09
+34 http GET https://registry.npmjs.org/documentdb
+35 silly lockFile dc8cfd67-documentdb documentdb@
+36 silly lockFile dc8cfd67-documentdb documentdb@
+37 error Error: CERT_UNTRUSTED
+37 error     at SecurePair.<anonymous> (tls.js:1367:32)
+37 error     at SecurePair.emit (events.js:92:17)
+37 error     at SecurePair.maybeInitFinished (tls.js:979:10)
+37 error     at CleartextStream.read [as _read] (tls.js:471:13)
+37 error     at CleartextStream.Readable.read (_stream_readable.js:340:10)
+37 error     at EncryptedStream.write [as _write] (tls.js:368:25)
+37 error     at doWrite (_stream_writable.js:225:10)
+37 error     at writeOrBuffer (_stream_writable.js:215:5)
+37 error     at EncryptedStream.Writable.write (_stream_writable.js:182:11)
+37 error     at write (_stream_readable.js:601:24)
+37 error     at flow (_stream_readable.js:610:7)
+37 error     at Socket.pipeOnReadable (_stream_readable.js:642:5)
+38 error If you need help, you may report this *entire* log,
+38 error including the npm and node versions, at:
+38 error     <http://github.com/npm/npm/issues>
+39 error System Windows_NT 6.1.7601
+40 error command "c:\\PROGRAM FILES\\NODEJS\\node.exe" "c:\\PROGRAM FILES\\NODEJS\\node_modules\\npm\\bin\\npm-cli.js" "install" "documentdb" "--save"
+41 error cwd c:\dev\surfreport\surfreport\server
+42 error node -v v0.10.30
+43 error npm -v 1.4.21
+44 verbose exit [ 1, true ]

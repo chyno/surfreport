@@ -18,9 +18,10 @@ System.register(['aurelia-framework', 'aurelia-http-client'], function (_export)
         function Flickr(http) {
           _classCallCheck(this, _Flickr);
 
-          this.heading = 'Flickr';
-          this.images = [];
-          this.url = 'http://api.flickr.com/services/feeds/photos_public.gne?tags=mountain&tagmode=any&format=json';
+          this.heading = 'Admin';
+          this.firstName = '';
+          this.lastNameName = '';
+          this.zipCode = '';
 
           this.http = http;
         }
@@ -28,13 +29,19 @@ System.register(['aurelia-framework', 'aurelia-http-client'], function (_export)
         var _Flickr = Flickr;
 
         _createClass(_Flickr, [{
+          key: 'submit',
+          value: function submit() {}
+        }, {
           key: 'activate',
           value: function activate() {
-            var _this = this;
-
-            return this.http.jsonp(this.url).then(function (response) {
-              _this.images = response.content.items;
-            });
+            this.firstName = '';
+            this.lastNameName = '';
+            this.zipCode = '';
+          }
+        }, {
+          key: 'fullName',
+          get: function () {
+            return '' + this.firstName + ' ' + this.lastName;
           }
         }]);
 
@@ -46,4 +53,4 @@ System.register(['aurelia-framework', 'aurelia-http-client'], function (_export)
     }
   };
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImZsaWNrci5qcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7MEJBSWEsTUFBTTs7Ozs7Ozs7aUNBSlgsTUFBTTs7c0NBQ04sVUFBVTs7O0FBR0wsWUFBTTtBQUtOLGlCQUxBLE1BQU0sQ0FLTCxJQUFJLEVBQUM7OztlQUpqQixPQUFPLEdBQUcsUUFBUTtlQUNsQixNQUFNLEdBQUcsRUFBRTtlQUNYLEdBQUcsR0FBRyw4RkFBOEY7O0FBR2xHLGNBQUksQ0FBQyxJQUFJLEdBQUcsSUFBSSxDQUFDO1NBQ2xCOztzQkFQVSxNQUFNOzs7O2lCQVNULG9CQUFFOzs7QUFDUixtQkFBTyxJQUFJLENBQUMsSUFBSSxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLENBQUMsSUFBSSxDQUFDLFVBQUEsUUFBUSxFQUFJO0FBQ2hELG9CQUFLLE1BQU0sR0FBRyxRQUFRLENBQUMsT0FBTyxDQUFDLEtBQUssQ0FBQzthQUN0QyxDQUFDLENBQUM7V0FDSjs7O0FBYlUsY0FBTSxHQURsQixNQUFNLENBQUMsVUFBVSxDQUFDLENBQ04sTUFBTSxLQUFOLE1BQU07ZUFBTixNQUFNOzs7d0JBQU4sTUFBTSIsImZpbGUiOiJmbGlja3IuanMiLCJzb3VyY2VSb290IjoiLi4vY2xpZW50L3NyYy8ifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFkbWluLmpzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7OzswQkFJYSxNQUFNOzs7Ozs7OztpQ0FKWCxNQUFNOztzQ0FDTixVQUFVOzs7QUFHTCxZQUFNO0FBTU4saUJBTkEsTUFBTSxDQU1MLElBQUksRUFBQzs7O2VBTGpCLE9BQU8sR0FBRyxPQUFPO2VBQ2pCLFNBQVMsR0FBRyxFQUFFO2VBQ2QsWUFBWSxHQUFHLEVBQUU7ZUFDakIsT0FBTyxHQUFHLEVBQUU7O0FBR1YsY0FBSSxDQUFDLElBQUksR0FBRyxJQUFJLENBQUM7U0FDbEI7O3NCQVJVLE1BQU07Ozs7aUJBVVgsa0JBQUUsRUFFUDs7O2lCQU1PLG9CQUFFO0FBQ1AsZ0JBQUksQ0FBQyxTQUFTLEdBQUcsRUFBRSxDQUFDO0FBQ3BCLGdCQUFJLENBQUMsWUFBWSxHQUFHLEVBQUUsQ0FBQztBQUN2QixnQkFBSSxDQUFDLE9BQU8sR0FBRyxFQUFFLENBQUM7V0FDcEI7OztlQVJVLFlBQUU7QUFDVCx3QkFBVSxJQUFJLENBQUMsU0FBUyxTQUFJLElBQUksQ0FBQyxRQUFRLENBQUc7V0FDL0M7OztBQWhCVSxjQUFNLEdBRGxCLE1BQU0sQ0FBQyxVQUFVLENBQUMsQ0FDTixNQUFNLEtBQU4sTUFBTTtlQUFOLE1BQU07Ozt3QkFBTixNQUFNIiwiZmlsZSI6ImFkbWluLmpzIiwic291cmNlUm9vdCI6Ii4uL2NsaWVudC9zcmMvIn0=
