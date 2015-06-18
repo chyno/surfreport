@@ -27,6 +27,15 @@ var maxReading = function (item, item2) {
     app.get(api + '/readings', getReadings);
     app.get(api + '/latestreading', getLatestReading);
 
+   //sends the request through our local login/signin strategy, and if successful takes user to homepage, otherwise returns then to signin page
+   /*
+    app.post(api + '/login', passport.authenticate('local-signin', { 
+        successRedirect: '/',
+        failureRedirect: '/signin'
+    })
+    );
+*/
+
     function getReading(req, res, next) {
         
         var reading = customers.filter(function(c) {
