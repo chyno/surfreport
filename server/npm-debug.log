@@ -1,0 +1,73 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'c:\\PROGRAM FILES\\NODEJS\\node.exe',
+1 verbose cli   'c:\\PROGRAM FILES\\NODEJS\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   'passport' ]
+2 info using npm@1.4.21
+3 info using node@v0.10.30
+4 warn package.json server@1.0.0 No description
+5 warn package.json server@1.0.0 No repository field.
+6 warn package.json server@1.0.0 No README data
+7 verbose readDependencies using package.json deps
+8 verbose cache add [ 'passport', null ]
+9 verbose cache add name=undefined spec="passport" args=["passport",null]
+10 verbose parsed url { protocol: null,
+10 verbose parsed url   slashes: null,
+10 verbose parsed url   auth: null,
+10 verbose parsed url   host: null,
+10 verbose parsed url   port: null,
+10 verbose parsed url   hostname: null,
+10 verbose parsed url   hash: null,
+10 verbose parsed url   search: null,
+10 verbose parsed url   query: null,
+10 verbose parsed url   pathname: 'passport',
+10 verbose parsed url   path: 'passport',
+10 verbose parsed url   href: 'passport' }
+11 silly lockFile a3404013-passport passport
+12 verbose lock passport C:\Users\jxc14\AppData\Roaming\npm-cache\a3404013-passport.lock
+13 silly lockFile a3404013-passport passport
+14 silly lockFile a3404013-passport passport
+15 verbose addNamed [ 'passport', '' ]
+16 verbose addNamed [ null, '*' ]
+17 silly lockFile d5a254c4-passport passport@
+18 verbose lock passport@ C:\Users\jxc14\AppData\Roaming\npm-cache\d5a254c4-passport.lock
+19 silly addNameRange { name: 'passport', range: '*', hasData: false }
+20 verbose request where is /passport
+21 verbose request registry https://registry.npmjs.org/
+22 verbose request id df3c6e9455b7f7e8
+23 verbose url raw /passport
+24 verbose url resolving [ 'https://registry.npmjs.org/', './passport' ]
+25 verbose url resolved https://registry.npmjs.org/passport
+26 verbose request where is https://registry.npmjs.org/passport
+27 info trying registry request attempt 1 at 11:56:50
+28 http GET https://registry.npmjs.org/passport
+29 info retry will retry, error on last attempt: Error: CERT_UNTRUSTED
+30 info trying registry request attempt 2 at 11:57:00
+31 http GET https://registry.npmjs.org/passport
+32 info retry will retry, error on last attempt: Error: CERT_UNTRUSTED
+33 info trying registry request attempt 3 at 11:58:00
+34 http GET https://registry.npmjs.org/passport
+35 silly lockFile d5a254c4-passport passport@
+36 silly lockFile d5a254c4-passport passport@
+37 error Error: CERT_UNTRUSTED
+37 error     at SecurePair.<anonymous> (tls.js:1367:32)
+37 error     at SecurePair.emit (events.js:92:17)
+37 error     at SecurePair.maybeInitFinished (tls.js:979:10)
+37 error     at CleartextStream.read [as _read] (tls.js:471:13)
+37 error     at CleartextStream.Readable.read (_stream_readable.js:340:10)
+37 error     at EncryptedStream.write [as _write] (tls.js:368:25)
+37 error     at doWrite (_stream_writable.js:225:10)
+37 error     at writeOrBuffer (_stream_writable.js:215:5)
+37 error     at EncryptedStream.Writable.write (_stream_writable.js:182:11)
+37 error     at write (_stream_readable.js:601:24)
+37 error     at flow (_stream_readable.js:610:7)
+37 error     at Socket.pipeOnReadable (_stream_readable.js:642:5)
+38 error If you need help, you may report this *entire* log,
+38 error including the npm and node versions, at:
+38 error     <http://github.com/npm/npm/issues>
+39 error System Windows_NT 6.1.7601
+40 error command "c:\\PROGRAM FILES\\NODEJS\\node.exe" "c:\\PROGRAM FILES\\NODEJS\\node_modules\\npm\\bin\\npm-cli.js" "install" "passport"
+41 error cwd c:\dev\surfreport\surfreport\server
+42 error node -v v0.10.30
+43 error npm -v 1.4.21
+44 verbose exit [ 1, true ]
