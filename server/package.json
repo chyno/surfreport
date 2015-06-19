@@ -9,6 +9,8 @@
   "author": "JOhn Chynoweth",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.12.4"
+    "express": "^4.12.4",
+    "moment": "^2.10.3",
+    "ramda": "^0.15.0"
   }
 }

@@ -9,7 +9,7 @@ export class Welcome{
   speed = '';
   direction = '';
   reading = '';
-  url = '/api/readings';
+  url = '/api/latestreading';
 
   constructor(http){
     this.http = http;
@@ -28,12 +28,11 @@ export class Welcome{
    
     return this.http.get(this.url).then(response => {
        
-      this.city = response.content[0].city;
-      this.speed = response.content[0].speed;
-      this.direction = response.content[0].direction;
-      this.reading = response.content[0].reading;
+      this.city = response.content.city;
+      this.speed = response.content.speed;
+      this.direction = response.content.direction;
+      this.reading = response.content.reading;
 
-    
     });
 
   }
