@@ -1,64 +1,35 @@
-
 var express = require('express');
 var app = express();
-
-var logger = require('morgan'),
-    cookieParser = require('cookie-parser'),
-    bodyParser = require('body-parser'),
-    methodOverride = require('method-override'),
-    session = require('express-session'),
-    passport = require('passport'),
-    LocalStrategy = require('passport-local'),
-   GoogleStrategy = require('passport-google');
-   
+var routes = require('./routes');
 
 exports.StartServer = function() {
-  //console.log("hello from server");
+	  //console.log("hello from server");
 
-//app.use('/', express.static('/index.html'));
-app.use(express.static('./client'));
-app.use('/', express.static('./client/index.html'));
-
-//===============EXPRESS================
-// Configure Express
-app.use(logger('combined'));
-app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(methodOverride('X-HTTP-Method-Override'));
-app.use(session({secret: 'supernova', saveUninitialized: true, resave: true}));
-app.use(passport.initialize());
-app.use(passport.session());
+	//app.use('/', express.static('/index.html'));
+	app.use(express.static('./client'), function(req, res, next) {
+		//res.redirect('https://www.yahoo.com/');
+		console.log("request path: " + req.path);
+        next();
+		 });
 
 
-// Session-persisted message middleware
-app.use(function(req, res, next){
-  var err = req.session.error,
-      msg = req.session.notice,
-      success = req.session.success;
+	
 
-  delete req.session.error;
-  delete req.session.success;
-  delete req.session.notice;
-
-  if (err) res.locals.error = err;
-  if (msg) res.locals.notice = msg;
-  if (success) res.locals.success = success;
-
+	// a middleware with no mount path; gets executed for every request to the app
+app.use(function (req, res, next) {
+  console.log('Time:', Date.now());
   next();
 });
+	//app.use('/', express.static('./client/index.html'));
+	
 
-routes = require('./routes/index')(app);
-var server = app.listen(3000, function () {
+	routes(app);
 
-  var host = server.address().address;
-  var port = server.address().port;
+     //===============PORT=================
+	var port = process.env.PORT || 9000;
+	app.listen(port);
+	console.log("listening on " + port + "!");
 
-  console.log('Example app listening at http://%s:%s', host, port);
+     
 
-});
-
- 
-
-};	
-
+};  
