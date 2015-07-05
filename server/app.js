@@ -12,10 +12,7 @@ console.log("path " +__dirname + '/client');
         next();
 		 });
 
-app.get('/login', function(req, res){
-  res.send('hello world');
-});
-
+ 
 	routes(app);
      
      //===============PORT=================

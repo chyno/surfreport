@@ -6,9 +6,9 @@ import {Redirect} from 'aurelia-router';
 export class App {
   configureRouter(config, router){
     config.title = 'Chyno Surf Report';
-    //config.addPipelineStep('authorize', AuthorizeStep);
+    config.addPipelineStep('authorize', AuthorizeStep);
     config.map([
-      { route: ['','reading'],  moduleId: './reading',   nav: true, title:'Reading', auth: true },
+      { route: ['','reading'],  moduleId: './reading',   nav: true, title:'Reading', auth: true},
       { route: 'admin',        moduleId: './admin',     nav: true, title:'Administration' },
      
     ]);
@@ -25,7 +25,7 @@ class AuthorizeStep {
     // The reason for using `nextInstructions` is because
     // this includes child routes.
     if (routingContext.nextInstructions.some(i => i.config.auth)) {
-      var isLoggedIn = false;  /* insert magic here */
+      var isLoggedIn = true;  /* insert magic here */
       if (!isLoggedIn) {
         return next.cancel(new Redirect('admin'));
       }
