@@ -4,7 +4,7 @@ import {HttpClient} from 'aurelia-http-client';
 
 @inject(HttpClient)
 export class Welcome{
-  heading = ' Latest Reading';
+  heading = 'Latest Reading';
   city = '';
   speed = '';
   direction = '';

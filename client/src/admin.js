@@ -2,27 +2,27 @@ import {inject} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-http-client';
 
 @inject(HttpClient)
-export class Flickr{
-  heading = 'Admin';
-  firstName = '';
-  lastNameName = '';
-  zipCode = '';
+export class Admin{
+  username = '';
+  hash = '';
+   
 
   constructor(http){
     this.http = http;
   }
 
-  submit(){
+  logIn(){
+    var user = {
+    "username": this.username,
+    "password": this.hash
      
   }
-
- get fullName(){
-      return `${this.firstName} ${this.lastName}`;
+     alert('logging in for: ' + this.username);
   }
 
+  
+
   activate(){
-     this.firstName = '';
-     this.lastNameName = '';
-     this.zipCode = '';     
+        
   }
 }

@@ -1,6 +1,6 @@
 
 <template>
-  <h1>Sign in</h1>
+  <h1>Surf Report Sign in</h1>
   <p>We're using passport.js to demonstrate user authentication. Please sign-in with your Local, Twitter, Google, or Facebook account to view your profile.</p>
   <p>
     <a data-toggle="collapse" href="#local" class="btn btn-warning btn-lg" role="button"><span class="glyphicon glyphicon-user"></span> Sign in Locally</a>
@@ -14,20 +14,20 @@
     <a data-toggle="collapse" href="#local-reg" class="btn btn-default btn-md" role="button">I need to make an account</a>
   </div>
 
-  <form id="local-sign-in" class="collapse" action="/login" method="post">
+  <div id="local-sign-in" class="collapse"   >
     <div>
         <p></p>
         <label>Username:</label>
-        <input type="text" name="username"/>
+        <input type="text" name="username" value.bind="username"/>
     </div>
     <div>
         <label>Password:</label>
-        <input type="password" name="password"/>
+        <input type="password" name="password" value.bind="password"/>
     </div>
     <div>
-        <input type="submit" class="btn btn-primary btn-sm" value="Log In"/>
+        <button click.trigger="logIn()">Log In Local</button>
     </div>
-  </form>
+  </div>
 
   <form id="local-reg" class="collapse" action="/local-reg" method="post">
     <div>
@@ -43,4 +43,4 @@
         <input type="submit" class="btn btn-primary btn-sm" value="Register"/>
     </div>
   </form>
-</template
+</template>
