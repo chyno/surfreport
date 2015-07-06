@@ -24,6 +24,7 @@ module.exports = function(app) {
 
 
             app.get(api + '/reading/:id', getReading);
+            app.get(api + '/loginCheck', getLogInCheck);
             app.get(api + '/readings', getReadings);
             app.get(api + '/latestreading', getLatestReading);
 
@@ -53,4 +54,8 @@ module.exports = function(app) {
                 res.send(R.reduce(maxReading, {reading: "5/15/1999"} , readings));
             }
 
+
+            function  getLogInCheck(req, res, next) {
+                
+            }
 };

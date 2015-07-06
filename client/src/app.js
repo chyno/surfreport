@@ -1,7 +1,7 @@
 import 'bootstrap';
 import 'bootstrap/css/bootstrap.css!';
 import {Redirect} from 'aurelia-router';
-
+import {HttpClient} from 'aurelia-http-client';
 
 export class App {
   configureRouter(config, router){
@@ -19,11 +19,19 @@ export class App {
   
 }
 
+@inject(HttpClient)
 class AuthorizeStep {
+
+  constructor(http){
+    this.http = http;
+  }
+  
+   url = '/api/loginCheck';
   run(routingContext, next) {
     // Check if the route has an "auth" key
     // The reason for using `nextInstructions` is because
     // this includes child routes.
+    ///loginCheck
     if (routingContext.nextInstructions.some(i => i.config.auth)) {
       var isLoggedIn = true;  /* insert magic here */
       if (!isLoggedIn) {
