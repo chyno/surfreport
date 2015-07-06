@@ -56,6 +56,6 @@ module.exports = function(app) {
 
 
             function  getLogInCheck(req, res, next) {
-                
+                res.send(true);
             }
 };
