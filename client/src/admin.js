@@ -3,24 +3,27 @@ import {HttpClient} from 'aurelia-http-client';
 
 @inject(HttpClient)
 export class Admin{
-  username = '';
-  hash = '';
+  url = '/api/login'
+  //{ id: 1, username: 'bob', password: 'secret', email: 'bob@example.com' }
+   username = '';
+   password = '';
+   
+
+  logIn(){
+    var user = { id: 1, username: 'bob', password: 'secret', email: 'bob@example.com' };
+    this.http.post(this.url,user).then(function(){
+       alert('User is logged in');
+    })
+     
+  }
+
    
 
   constructor(http){
     this.http = http;
   }
 
-  logIn(){
-    var user = {
-    "username": this.username,
-    "password": this.hash
      
-  }
-     alert('logging in for: ' + this.username);
-  }
-
-  
 
   activate(){
         
