@@ -37,6 +37,7 @@ class AuthorizeStep {
        return this.http.get(this.url).then(response => {
          var isLoggedIn  = response.content;
            if (!isLoggedIn) {
+            console.log("redirecting to admin. aruelia authriize");
               return next.cancel(new Redirect('admin'));
             } 
             return next();  

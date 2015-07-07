@@ -145,7 +145,7 @@ app.post('/api/login', function(req, res, next) {
       //return res.redirect('/users/' + user.username);
       //res.send("true");
        console.log("it logged in!");
-       res.send('false');
+       res.send('true');
     });
   })(req, res, next);
 });
