@@ -126,7 +126,7 @@ app.post('/api/login',
 
 app.post('/api/login', function(req, res, next) {
   console.log(req.body);
-  
+
   passport.authenticate('local', function(err, user, info) {
     if (err) { return next(err) }
     if (!user) {
@@ -134,6 +134,7 @@ app.post('/api/login', function(req, res, next) {
       //return res.redirect('/login')
      // res.send("test: " + user);
      console.log("no user. log in error");
+     res.send('false');
     }
     req.logIn(user, function(err) {
       if (err) { 
@@ -144,6 +145,7 @@ app.post('/api/login', function(req, res, next) {
       //return res.redirect('/users/' + user.username);
       //res.send("true");
        console.log("it logged in!");
+       res.send('false');
     });
   })(req, res, next);
 });
