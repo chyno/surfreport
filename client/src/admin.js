@@ -32,10 +32,18 @@ export class Admin{
 
   constructor(http){
     self = this;
-    this.loginmessage = 'not logged in';
+    
     this.http = http.configure(x => { x.withHeader('Content-Type', 'application/json') });
   }
   
   activate(){      
+    if (window.user)
+    {
+       self.loginmessage = 'Logged In'; 
+    }
+    else
+    {
+      self.loginmessage = 'not logged in';
+    }
   }
 }
