@@ -58,6 +58,7 @@ module.exports = function(app) {
 
 
             function  getLogInCheck(req, res, next) {
+                console.log('is authenicated: ' + req.isAuthenticated());
                 res.send(req.isAuthenticated());
               //  res.send(true);
                 

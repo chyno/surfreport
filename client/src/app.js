@@ -34,15 +34,18 @@ class AuthorizeStep {
     // this includes child routes.
     ///loginCheck
     if (routingContext.nextInstructions.some(i => i.config.auth)) {
-       return this.http.get(this.url).then(response => {
-         var isLoggedIn  = response.content;
-           if (!isLoggedIn) {
-            console.log("redirecting to admin. aruelia authriize");
+      
+      if (window.user) {
+        console.log("success log in");
+        return next();
+      }
+      else
+      {
+              console.log("redirecting to admin. aruelia authriize");
               return next.cancel(new Redirect('admin'));
-            } 
-            return next();  
-       });
+      }       
      }
+
      return next();
   }
 }
