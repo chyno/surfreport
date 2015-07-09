@@ -24,7 +24,7 @@ module.exports = function(app) {
 
 
             app.get(api + '/reading/:id', getReading);
-            app.get(api + '/loginCheck', getLogInCheck);
+           // app.get(api + '/loginCheck', getLogInCheck);
             app.get(api + '/readings', getReadings);
             app.get(api + '/latestreading', getLatestReading);
 
@@ -57,10 +57,5 @@ module.exports = function(app) {
             }
 
 
-            function  getLogInCheck(req, res, next) {
-                console.log('is authenicated: ' + req.isAuthenticated());
-                res.send(req.isAuthenticated());
-              //  res.send(true);
-                
-            }
+        
 };

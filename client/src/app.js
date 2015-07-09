@@ -3,6 +3,8 @@ import 'bootstrap';
 import 'bootstrap/css/bootstrap.css!';
 import {Redirect} from 'aurelia-router';
 import {HttpClient} from 'aurelia-http-client';
+import {LoginData} from './loginData';
+
 
 export class App {
   configureRouter(config, router){
@@ -19,12 +21,13 @@ export class App {
 
 }
 
-
+@inject(LoginData)
 @inject(HttpClient)
 class AuthorizeStep {
    url = '/api/loginCheck';
 
-   constructor(http){
+   constructor(loginData,http){
+    this.loginData = loginData;
     this.http = http;
   }
 
@@ -35,7 +38,7 @@ class AuthorizeStep {
     ///loginCheck
     if (routingContext.nextInstructions.some(i => i.config.auth)) {
       
-      if (window.user) {
+      if (this.loginData.isCurrentLoggedIn()) {
         console.log("success log in");
         return next();
       }

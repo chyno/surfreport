@@ -133,7 +133,7 @@ app.post('/api/login', function(req, res, next) {
       //return res.redirect('/login')
      // res.send("test: " + user);
      console.log("no user. log in error");
-     res.send('false');
+     return res.status(400).send('Current user does not exist');
     }
     req.logIn(user, function(err) {
       if (err) { 
@@ -144,7 +144,7 @@ app.post('/api/login', function(req, res, next) {
       //return res.redirect('/users/' + user.username);
       //res.send("true");
        console.log("it logged in!");
-       res.send('true');
+        return res.status(200).send('we are logged in');
     });
   })(req, res, next);
 });

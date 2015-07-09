@@ -1,49 +1,60 @@
 import {inject} from 'aurelia-framework';
-import {HttpClient} from 'aurelia-http-client';
+import {LoginData} from './loginData';
 
-@inject(HttpClient)
+let loggingInMessage = "... Logging in";
+let loggedInMessage = " is logged In";
+let notLoggedInMessage = "not logged In"
+let errorMessage = "Log In Failed";
+
+@inject(LoginData)
 export class Admin{
   url = '/api/login';
   //{ id: 1, username: 'bob', password: 'secret', email: 'bob@example.com' }
    username = '';
    password = '';
-  
+   isLoggedIn = false;
  
   logIn(){
-    self.loginmessage = '... Logging in';
-    var user = { id: 1, username: this.username, password: this.password, email: 'bob@example.com' };
-    this.http.post(this.url,user).then(function(response){
-       console.log("response body: " + response.content)
-       if (response.content === 'true')
-        {  
-         
-           window.user = user;
-           self.loginmessage = 'Logged In';
-
-        }
-        else
-        {
-           window.user = null;
-            self.loginmessage = 'Log in falied';
-        }
-    })
-     
+    self.loginmessage = loggingInMessage;
+    
+    self.loginData.logIn(self.username, self.password)
+                  .then(function(isLoggedIn) 
+                    {
+                      if (isLoggedIn)
+                    {   self.loginmessage =  self.username + loggedInMessage; }
+                    else
+                    { 
+                      self.loginmessage = errorMessage;
+                    }
+                    self.isLoggedIn = isLoggedIn;
+                  });                   
   }
 
-  constructor(http){
+  logOut(){
+    self.username = '';
+    self.password = '';
+    self.loginmessage = notLoggedInMessage;
+    window.isLoggedIn = null;
+     self.isLoggedIn = false;  
+  }
+
+  constructor(loginData){
     self = this;
     
-    this.http = http.configure(x => { x.withHeader('Content-Type', 'application/json') });
+    this.loginData = loginData;
+
+
   }
   
-  activate(){      
-    if (window.user)
+  activate(){ 
+     self.isLoggedIn = !!window.isLoggedIn;     
+    if (window.isLoggedIn)
     {
-       self.loginmessage = 'Logged In'; 
+       self.loginmessage =  self.username + loggedInMessage; 
     }
     else
     {
-      self.loginmessage = 'not logged in';
+      self.loginmessage = notLoggedInMessage;
     }
   }
 }

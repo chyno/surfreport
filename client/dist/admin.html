@@ -4,11 +4,13 @@
  
   <p> Please sign-in with your Local, Twitter, Google, or Facebook account to view your profile.</p>
   <h2>${loginmessage}</h2>
+  <div class="${isLoggedIn ?  'hidesection' : ''}">
   <p>
     <a data-toggle="collapse" href="#local" class="btn btn-warning btn-lg" role="button"><span class="glyphicon glyphicon-user"></span> Sign in Locally</a>
-    <a href="/auth/twitter" class="btn btn-info btn-lg" role="button"><span class="glyphicon glyphicon-user"></span> Sign in with Twitter</a>
-    <a href="/auth/google" class="btn btn-danger btn-lg" role="button"><span class="glyphicon glyphicon-user"></span> Sign in with Google</a>
-    <a href="/auth/facebook" class="btn btn-primary btn-lg" role="button"><span class="glyphicon glyphicon-user"></span> Sign in with Facebook</a>
+
+    
+    <a href="/auth/google" class="btn btn-danger btn-lg" role="button"><span class="glyphicon glyphicon-user"></span>Sign in with Google</a>
+    
   </p>
 
   <div id="local" class="collapse">
@@ -31,7 +33,7 @@
     </div>
   </div>
 
-  <form id="local-reg" class="collapse" action="/local-reg" method="post">
+  <div id="local-reg" class="collapse">
     <div>
         <p></p>
         <label>New Username:</label>
@@ -42,7 +44,13 @@
         <input type="password" name="password"/>
     </div>
     <div>
-        <input type="submit" class="btn btn-primary btn-sm" value="Register"/>
+         <button click.trigger="registerUser()">Register New User</button>
     </div>
-  </form>
+  </div>
+  </div>
+   <div class="${isLoggedIn ?  '' : 'hidesection'}">
+   <p>Log out</p>
+   <button click.trigger="logOut()">Log Out</button>
+  
+   </div>
 </template>
