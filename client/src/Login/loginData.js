@@ -26,5 +26,9 @@ export class LoginData {
     				});
   }	
 
+  logOut()
+  {
+     window.isLoggedIn = null;
+  }
   
 }

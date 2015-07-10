@@ -3,7 +3,7 @@ import 'bootstrap';
 import 'bootstrap/css/bootstrap.css!';
 import {Redirect} from 'aurelia-router';
 import {HttpClient} from 'aurelia-http-client';
-import {LoginData} from './loginData';
+import {LoginData} from './Login/loginData';
 
 
 export class App {
@@ -11,8 +11,8 @@ export class App {
     config.title = 'Chyno Surf Report';
     config.addPipelineStep('authorize', AuthorizeStep);
     config.map([
-      { route: ['','reading'],  moduleId: './reading',   nav: true, title:'Reading', auth: true},
-      { route: 'admin',        moduleId: './admin',     nav: true, title:'Administration' },
+      { route: ['','reading'],  moduleId: './Reading/reading',   nav: true, title:'Reading', auth: true},
+      { route: 'login',        moduleId: './Login/login',     nav: true, title:'Administration' },
      
     ]);
 
@@ -45,7 +45,7 @@ class AuthorizeStep {
       else
       {
               console.log("redirecting to admin. aruelia authriize");
-              return next.cancel(new Redirect('admin'));
+              return next.cancel(new Redirect('login'));
       }       
      }
 

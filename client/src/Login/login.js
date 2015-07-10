@@ -8,7 +8,6 @@ let errorMessage = "Log In Failed";
 
 @inject(LoginData)
 export class Admin{
-  url = '/api/login';
   //{ id: 1, username: 'bob', password: 'secret', email: 'bob@example.com' }
    username = '';
    password = '';
@@ -17,24 +16,25 @@ export class Admin{
   logIn(){
     self.loginmessage = loggingInMessage;
     
-    self.loginData.logIn(self.username, self.password)
-                  .then(function(isLoggedIn) 
-                    {
-                      if (isLoggedIn)
-                    {   self.loginmessage =  self.username + loggedInMessage; }
-                    else
-                    { 
-                      self.loginmessage = errorMessage;
-                    }
-                    self.isLoggedIn = isLoggedIn;
-                  });                   
+    self.loginData
+    .logIn(self.username, self.password)
+    .then(function(isLoggedIn) 
+      {
+       
+       if (isLoggedIn)
+       {   self.loginmessage =  self.username + loggedInMessage; }
+       else
+      { self.loginmessage = errorMessage; }
+
+        self.isLoggedIn = isLoggedIn;
+      });                   
   }
 
   logOut(){
     self.username = '';
     self.password = '';
     self.loginmessage = notLoggedInMessage;
-    window.isLoggedIn = null;
+    self.loginData.logOut();
      self.isLoggedIn = false;  
   }
 
@@ -42,8 +42,6 @@ export class Admin{
     self = this;
     
     this.loginData = loginData;
-
-
   }
   
   activate(){ 
