@@ -5,32 +5,35 @@ import {HttpClient} from 'aurelia-http-client';
 let url = "/api/latestreading";
 //let url = "readingsData";
 
+let clearFields = function(reading) {
+  reading.city = '';
+  reading.speed = '';
+  reading.direction = '';
+  reading.reading = '';
+  reading.zip = '';
+}
+
 @inject(HttpClient)
-export class Welcome{
+export class Reading{
   heading = 'Latest Reading';
   city = '';
   speed = '';
   direction = '';
   reading = '';
+  zip = '';
  
-
   constructor(http){
     this.http = http;
   }
-  //Getters can't be observed with Object.observe, so they must be dirty checked.
-  //However, if you tell Aurelia the dependencies, it no longer needs to dirty check the property.
-  //To optimize by declaring the properties that this getter is computed from, uncomment the line below.
-  //@computedFrom('firstName', 'lastName')
-   
-
+ 
   canDeactivate() {
    return true;
     }
   
   activate() {
-   
+    clearFields(this);
     return this.http.get(url).then(response => {
-       
+      this.zip = "22207";
       this.city = response.content.city;
       this.speed = response.content.speed;
       this.direction = response.content.direction;
@@ -39,7 +42,6 @@ export class Welcome{
     });
 
   }
-
 }
 
 export class UpperValueConverter {

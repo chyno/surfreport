@@ -6,12 +6,23 @@ let loggedInMessage = " is logged In";
 let notLoggedInMessage = "not logged In"
 let errorMessage = "Log In Failed";
 
+let clearFields = function(login) {
+   
+    login.username = 'bob';
+    login.password = 'secret';
+    login.id = -1;
+    login.zip = '';
+    login.isLoggedIn = false;
+}
+
 @inject(LoginData)
-export class Admin{
+export class Login{
   //{ id: 1, username: 'bob', password: 'secret', email: 'bob@example.com' }
-    username = "bob";
-    password = "secret";
-    zip = "";
+    
+    username = '';
+    password = '';
+    id = -1;
+    zip = '';
     isLoggedIn = false;
  
   logIn(){
@@ -36,31 +47,26 @@ export class Admin{
       }, 
       function(error) { 
         console.log(error);
+        clearFields(this);
         self.loginmessage = 'exception';
       });                   
   }
 
   logOut(){
 
-    this.username = '';
-    this.password = '';
-    this.id = -1;
-    this.zip = '';
-
-    this.loginmessage = notLoggedInMessage;
-    this.loginData.logOut();
-    this.isLoggedIn = false;  
+    clearFields(this);
+     this.loginmessage = notLoggedInMessage;
+    this.loginData.logOut(); 
   }
 
   constructor(loginData){
-    
-    
-    this.loginData = loginData;
+     this.loginData = loginData;
   }
   
   activate(){ 
-    this.isLoggedIn = !!window.isLoggedIn;     
-    
+
+    clearFields(this);
+    this.isLoggedIn = !!window.isLoggedIn;        
     if (window.isLoggedIn)
     {
        this.loginmessage =  this.username + loggedInMessage; 
