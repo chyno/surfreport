@@ -2,6 +2,9 @@ import {inject} from 'aurelia-framework';
 import {computedFrom} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-http-client';
 
+let url = "/api/latestreading";
+//let url = "readingsData";
+
 @inject(HttpClient)
 export class Welcome{
   heading = 'Latest Reading';
@@ -9,7 +12,7 @@ export class Welcome{
   speed = '';
   direction = '';
   reading = '';
-  url = '/api/latestreading';
+ 
 
   constructor(http){
     this.http = http;
@@ -26,7 +29,7 @@ export class Welcome{
   
   activate() {
    
-    return this.http.get(this.url).then(response => {
+    return this.http.get(url).then(response => {
        
       this.city = response.content.city;
       this.speed = response.content.speed;

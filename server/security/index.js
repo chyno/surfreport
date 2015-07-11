@@ -124,7 +124,7 @@ app.post('/api/login',
 //   acheive the same functionality.
 
 app.post('/api/login', function(req, res, next) {
-  console.log(req.body);
+  console.log("request body: " + JSON.stringify(req.body));
 
   passport.authenticate('local', function(err, user, info) {
     if (err) { return next(err) }

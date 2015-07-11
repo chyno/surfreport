@@ -15,14 +15,23 @@ export class LoginData {
   	return !!window.isLoggedIn;
   }
 
-  logIn(userName, password) {
-       var user = { id: 1, username: userName, password: password, email: 'foo@example.com' };
+  logIn(user) {
+      user.zip = '';
        return this.http.post(baseUrl,user)
        			.then(function(response){
+              user.zip = '22207';
        				console.log("response body: " + response.content);
        				console.log("is isSuccess: " + response.isSuccess);
-       				window.isLoggedIn = response.isSuccess;
-       				return response.isSuccess;
+       				
+              window.isLoggedIn = response.isSuccess;
+
+              if (window.isLoggedIn)
+                {return user}
+              else
+              {
+                return null;
+              }
+       				
     				});
   }	
 

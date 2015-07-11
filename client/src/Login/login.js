@@ -9,50 +9,65 @@ let errorMessage = "Log In Failed";
 @inject(LoginData)
 export class Admin{
   //{ id: 1, username: 'bob', password: 'secret', email: 'bob@example.com' }
-   username = '';
-   password = '';
-   isLoggedIn = false;
+    username = "bob";
+    password = "secret";
+    zip = "";
+    isLoggedIn = false;
  
   logIn(){
-    self.loginmessage = loggingInMessage;
+    var self = this;
+    this.loginmessage = loggingInMessage;
     
-    self.loginData
-    .logIn(self.username, self.password)
-    .then(function(isLoggedIn) 
+    this.loginData
+    .logIn({username: this.username, password : this.password})
+    .then(function(currentUser) 
       {
        
-       if (isLoggedIn)
-       {   self.loginmessage =  self.username + loggedInMessage; }
-       else
-      { self.loginmessage = errorMessage; }
-
-        self.isLoggedIn = isLoggedIn;
+         if (currentUser)
+         {     
+          self.zip = currentUser.zip; 
+          self.loginmessage =  self.username + loggedInMessage;
+        }
+         else
+        {
+          self.loginmessage = errorMessage; 
+        }
+        self.isLoggedIn = !!currentUser;
+      }, 
+      function(error) { 
+        console.log(error);
+        self.loginmessage = 'exception';
       });                   
   }
 
   logOut(){
-    self.username = '';
-    self.password = '';
-    self.loginmessage = notLoggedInMessage;
-    self.loginData.logOut();
-     self.isLoggedIn = false;  
+
+    this.username = '';
+    this.password = '';
+    this.id = -1;
+    this.zip = '';
+
+    this.loginmessage = notLoggedInMessage;
+    this.loginData.logOut();
+    this.isLoggedIn = false;  
   }
 
   constructor(loginData){
-    self = this;
+    
     
     this.loginData = loginData;
   }
   
   activate(){ 
-     self.isLoggedIn = !!window.isLoggedIn;     
+    this.isLoggedIn = !!window.isLoggedIn;     
+    
     if (window.isLoggedIn)
     {
-       self.loginmessage =  self.username + loggedInMessage; 
+       this.loginmessage =  this.username + loggedInMessage; 
     }
     else
     {
-      self.loginmessage = notLoggedInMessage;
+      this.loginmessage = notLoggedInMessage;
     }
   }
 }
