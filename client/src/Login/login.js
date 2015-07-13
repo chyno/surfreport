@@ -39,9 +39,9 @@ export class Login{
          {     
           self.zip = currentUser.zip; 
           self.loginmessage =  self.username + loggedInMessage;
-          let url = this.router.generate("reading", {id: user.zip});
+          let url = self.router.generate("reading", {id: currentUser.zip});
           console.log("navigating to: " + url)
-          this.router.navigate(url);
+          self.router.navigate(url);
 
         }
          else
