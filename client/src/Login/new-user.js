@@ -10,12 +10,12 @@ export class NewUser {
 
 
 	constructor(loginData){
-     this.loginData = loginData;
+      this.loginData = loginData;
     }
 
 	registerUser()
 	{
-		this.loginData.signUpUser(this.username, this.password, this.zip).
+		this.loginData.signupUser(this.username, this.password, this.zip).
 		then(function (isSuccess) {
 			if(isSuccess)
 			{
@@ -34,6 +34,6 @@ export class NewUser {
 
 	activate()
 	{
-		this.loginMessage = '';
+		  
 	}
 }

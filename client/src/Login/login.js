@@ -1,4 +1,5 @@
 import {inject} from 'aurelia-framework';
+import {Router} from 'aurelia-router';
 import {LoginData} from './loginData';
 
 let loggingInMessage = "... Logging in";
@@ -15,7 +16,7 @@ let clearFields = function(login) {
     login.isLoggedIn = false;
 }
 
-@inject(LoginData)
+@inject(LoginData, Router)
 export class Login{
   //{ id: 1, username: 'bob', password: 'secret', email: 'bob@example.com' }
     
@@ -38,6 +39,10 @@ export class Login{
          {     
           self.zip = currentUser.zip; 
           self.loginmessage =  self.username + loggedInMessage;
+          let url = this.router.generate("reading", {id: user.zip});
+          console.log("navigating to: " + url)
+          this.router.navigate(url);
+
         }
          else
         {
@@ -58,8 +63,9 @@ export class Login{
     this.loginData.logOut(); 
   }
 
-  constructor(loginData){
+  constructor(loginData, router){
      this.loginData = loginData;
+     this.router = router
   }
   
   activate(){ 

@@ -1,20 +1,54 @@
 <template>
-<div id="local-reg" >
-    <div>
-        <p></p>
-        <label>New Username:</label>
-        <input type="text" name="username" ${username}/>
+
+
+<div class="container">
+        <div class="panel panel-default">
+
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <h3>Adding User</h3>
+                </div>
+            </div>
+
+            <div class="panel-body">
+
+                <form class="form-horizontal" 
+                      validate.bind="validation"
+                      submit.trigger="save()">
+
+                    <div class="form-group">
+                         
+                
+                        <label class="col-sm-3 control-label">User Name</label>
+                        <div class="col-sm-9">
+                                
+                            <input type="text" placeholder="username" class="form-control"
+                                   value.bind="username" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Password</label>
+                        <div class="col-sm-9">
+                            <input type="password" placeholder="Password"
+                                   value.bind="password" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Zip</label>
+                        <div class="col-sm-9">
+                            <input type="text" placeholder="Zip"
+                                   value.bind="zip" class="form-control" />
+                        </div>
+                    </div>
+                    <button click.trigger="registerUser()">Register New User</button>
+
+                </form>
+
+            </div>
+
+        </div>
     </div>
-    <div>
-        <label>New Password:</label>
-        <input type="password" name="password" ${password}/>
-    </div>
-     <div>
-        <label>Zip Code:</label>
-        <input type="text" name="zip" ${zip}/>
-    </div>
-    <div>
-         <button click.trigger="registerUser()">Register New User</button>
-    </div>
-  </div>
+
   </template>
