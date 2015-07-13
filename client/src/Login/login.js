@@ -30,7 +30,7 @@ export class Login{
     this.loginmessage = loggingInMessage;
     
     this.loginData
-    .logIn({username: this.username, password : this.password})
+    .logIn(this.username, this.password)
     .then(function(currentUser) 
       {
        
@@ -53,9 +53,8 @@ export class Login{
   }
 
   logOut(){
-
     clearFields(this);
-     this.loginmessage = notLoggedInMessage;
+    this.loginmessage = notLoggedInMessage;
     this.loginData.logOut(); 
   }
 
@@ -64,10 +63,9 @@ export class Login{
   }
   
   activate(){ 
-
     clearFields(this);
-    this.isLoggedIn = !!window.isLoggedIn;        
-    if (window.isLoggedIn)
+    this.isLoggedIn =  this.loginData.isCurrentLoggedIn();        
+    if (this.isLoggedIn)
     {
        this.loginmessage =  this.username + loggedInMessage; 
     }

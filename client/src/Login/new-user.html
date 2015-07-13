@@ -3,11 +3,15 @@
     <div>
         <p></p>
         <label>New Username:</label>
-        <input type="text" name="username"/>
+        <input type="text" name="username" ${username}/>
     </div>
     <div>
         <label>New Password:</label>
-        <input type="password" name="password"/>
+        <input type="password" name="password" ${password}/>
+    </div>
+     <div>
+        <label>Zip Code:</label>
+        <input type="text" name="zip" ${zip}/>
     </div>
     <div>
          <button click.trigger="registerUser()">Register New User</button>

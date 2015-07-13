@@ -13,7 +13,7 @@ export class App {
     config.map([
       { route: ['','reading'],  moduleId: './Reading/reading',   nav: true, title:'Reading', auth: true},
       { route: 'login',      moduleId: './Login/login',     nav: true, title:'Login' },
-      { route: 'newuser',   moduleId: './Login/new-user',     nav: false, title:'New User' }
+      { route: 'newuser',   moduleId: './Login/new-user',     nav: false, title:'New User', name:'newuser' }
      
     ]);
 
