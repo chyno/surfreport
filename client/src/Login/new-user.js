@@ -28,7 +28,6 @@ export class NewUser {
 			else
 			{
 				this.loginMessage = 'Error adding user';
-
 			}
 
 		});

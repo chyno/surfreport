@@ -9,6 +9,8 @@
                      <p> Please sign-in with your Local, Twitter, Google, or Facebook account to view your profile.</p>
                 </div>
             </div>
+
+
             <div class="panel-body">
            
                    <label class="col-sm-2 control-label">User Name</label>
@@ -17,7 +19,7 @@
                             <input type="text" placeholder="username" 
                                    value.bind="username" />
                     </div>
-                    </div>
+                    
 
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Password</label>
@@ -26,11 +28,16 @@
                                    value.bind="password" />
                         </div>
                     </div>
-                    <button click.trigger="logIn()">Log In Local</button>
-                    <a route-href='route:newuser'>New User</a>
+                     <div class="form-group">
+                         <div class="col-sm-12" >    
+                         <button click.trigger="logIn()">Log In Local</button>
+                          <a class="btn btn-default" route-href='route:newuser'>New User</a>
+                          </div>
+                     </div>
+                    
         </div>
 
-        <div class="panel panel-default" if.bind="isLoggedIn">
+        <div class="panel panel-default  " if.bind="isLoggedIn">
             <div class="panel-heading">
                 <div class="panel-title">
                     <h3>Surf Report Logout</h3>
@@ -41,20 +48,20 @@
            
                    <label class="col-sm-2 control-label">User Name</label>
                      <div class="col-sm-10">
-                                
-                            <input type="text" placeholder="username" 
-                                   value.bind="username" />
+                                ${username}
+                            
                     </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Zip</label>
                         <div class="col-sm-10">
-                            <input type="text" placeholder="zip"
-                                   value.bind="zip" />
+                            ${zip}
                         </div>
                     </div>
-                    <button click.trigger="logOut()">Log Out</button>
+                     <div class="form-group">
+                      <button click.trigger="logOut()">Log Out</button>
+                    </div>
         </div>
     </div>
 

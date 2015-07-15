@@ -6,3 +6,8 @@ body {
 {
   visibility: hidden;
 }
+
+.paddingborder
+{
+	margin: 12em;
+}

@@ -9,8 +9,8 @@ let errorMessage = "Log In Failed";
 
 let clearFields = function(login) {
    
-    login.username = 'bob';
-    login.password = 'secret';
+    login.username = '';
+    login.password = '';
     login.id = -1;
     login.zip = '';
     login.isLoggedIn = false;
