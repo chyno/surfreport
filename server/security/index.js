@@ -3,8 +3,9 @@ var logger = require('morgan'),
     bodyParser = require('body-parser'),
     methodOverride = require('method-override'),   
     session = require('express-session');
+   var mongoose = require('mongoose');
 
-var User =  mongoose.model('User');
+
   
 var flash = require('connect-flash')
   , express = require('express')
@@ -87,13 +88,12 @@ app.use(passport.session());
   //app.use(app.router);
 
   function addUser(req, res, next) {
-    
+  var User =  mongoose.model('User');
    var user = new User(req.body);
-   user.provider = 'local';
+  
     user.save(function (err) {
     if (err) {
-      return res.render('users/signup', {
-      if (err) req.flash('error', 'Sorry! We are not able to add user!');
+       req.flash('error', 'Sorry! We are not able to add user!');
     }
     else
     {
