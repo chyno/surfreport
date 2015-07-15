@@ -4,7 +4,7 @@ var logger = require('morgan'),
     methodOverride = require('method-override'),   
     session = require('express-session');
 
-var User = require('../models/user');
+var User =  mongoose.model('User');
   
 var flash = require('connect-flash')
   , express = require('express')
@@ -17,28 +17,17 @@ var flash = require('connect-flash')
 module.exports = function(app) {
   
    
- // var users = [
- //   { id: 1, username: 'bob', password: 'secret', email: 'bob@example.com' }
- // , { id: 2, username: 'joe', password: 'birthday', email: 'joe@example.com' }];
+  var users = [
+    { id: 1, username: 'bob', password: 'secret', email: 'bob@example.com' }
+  , { id: 2, username: 'joe', password: 'birthday', email: 'joe@example.com' }];
 
 function findById(id, fn) {
-  User.findOne({ 'user.id': id }, 'user id', 
-    function (err, user) {
-      if (err) {return fn(null,null);}
-      console.log('user id is a %s.', user.id) // Space Ghost is a talk show host.
-      
-      fn(null, user);
-      });
+  fn(null, users[0]);
 }
 
 function findByUsername(username, fn) {
-	User.findOne({ 'user.username': username }, 'user name', 
-    function (err, user) {
-      if (err) {return fn(null,null);}
-      console.log('username is a %s.', user.username) // Space Ghost is a talk show host.
-      
-      fn(null, user);
-      });
+  fn(null, users[0]);
+	 
 }
 
 
@@ -99,14 +88,19 @@ app.use(passport.session());
 
   function addUser(req, res, next) {
     
-    var user = req.body;
-     
-    User.addUser(user, function(err) {
-      if (err)
-      {
-        console.log(err);
-      }
-    });
+   var user = new User(req.body);
+   user.provider = 'local';
+    user.save(function (err) {
+    if (err) {
+      return res.render('users/signup', {
+      if (err) req.flash('error', 'Sorry! We are not able to add user!');
+    }
+    else
+    {
+      return res.status(200).send('User created');
+    }
+ 
+  });
     
   };
   
