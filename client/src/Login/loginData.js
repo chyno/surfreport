@@ -4,9 +4,9 @@ import {HttpClient} from 'aurelia-http-client';
 let baseUrl = "/api/login";
 let baseuserUrl = "/api/user";
 
-let createUser = function(id, username, password, zip)
+let createUser = function(username, password, zip)
 {
-  return {id: id, username: username, password : password, zip: zip};
+  return {username: username, password : password, zip: zip};
 }
 
 @inject (HttpClient)
@@ -23,7 +23,7 @@ export class LoginData {
 
   logIn(username, password) {
      
-       var user = createUser(-1, username, password, '');
+       var user = createUser( username, password, '');
      
        return this.http.post(baseUrl,user)
        			.then(function(response){
@@ -50,15 +50,17 @@ export class LoginData {
   
   signupUser(username, password, zip)
   {
-     var user = createUser(-1, username, password, zip);
+     var user = createUser(username, password, zip);
     var request = this.http.createRequest();
-    request.asPut()
+    request.asPost()
                .withUrl(baseuserUrl)
                .withHeader("Accept", "application/json")
                .withHeader("Content-Type", "application/json")
                .withContent(user);
 
-        return request.send().then(response => response.content);
+        return request.send().then(function(response) {
+           return response.body;
+        });
   }
   
 }

@@ -18,16 +18,32 @@ var flash = require('connect-flash')
 module.exports = function(app) {
   
    
-  var users = [
-    { id: 1, username: 'bob', password: 'secret', email: 'bob@example.com' }
-  , { id: 2, username: 'joe', password: 'birthday', email: 'joe@example.com' }];
+ // var users = [
+ //   { id: 1, username: 'bob', password: 'secret', email: 'bob@example.com' }
+ // , { id: 2, username: 'joe', password: 'birthday', email: 'joe@example.com' }];
 
 function findById(id, fn) {
-  fn(null, users[0]);
+   var User =  mongoose.model('User');
+   User.findById(User, function(err, user) {
+      if(err)
+      {
+        return fn(null, null);
+      }
+      return fn(null, user);
+   });
+    
 }
 
 function findByUsername(username, fn) {
-  fn(null, users[0]);
+  var User =  mongoose.model('User');
+   User.findOne({username: username}, function(err, user) {
+      if(err)
+      {
+        return fn(null, null);
+      }
+      return fn(null, user);
+   });
+    
 	 
 }
 
@@ -88,8 +104,8 @@ app.use(passport.session());
   //app.use(app.router);
 
   function addUser(req, res, next) {
-  var User =  mongoose.model('User');
-   var user = new User(req.body);
+    var User =  mongoose.model('User');
+    var user = new User(req.body);
   
     user.save(function (err) {
     if (err) {

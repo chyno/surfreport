@@ -6,25 +6,28 @@ export class NewUser {
 	username;
 	password;
 	zip;
-    loginMessage;
+    loginMessage = 'Add a new user';
 
 
 	constructor(loginData){
+
       this.loginData = loginData;
     }
 
 	registerUser()
 	{
+		this.loginMessage = "Adding new record ...";
+		var self = this;
 		this.loginData.signupUser(this.username, this.password, this.zip).
-		then(function (isSuccess) {
-			if(isSuccess)
+		then(function (responsebody) {
+			if(responsebody)
 			{
-				this.loginMessage = 'User has been addded';
+				this.loginMessage = responsebody;
 
 			}
 			else
 			{
-				this.loginMessage = 'User already exists';
+				this.loginMessage = 'Error adding user';
 
 			}
 
