@@ -1,11 +1,10 @@
-
 var logger = require('morgan'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
     methodOverride = require('method-override'),   
-   session = require('express-session');
-    
-   
+    session = require('express-session');
+
+var User = require('../models/user');
   
 var flash = require('connect-flash')
   , express = require('express')
@@ -17,29 +16,29 @@ var flash = require('connect-flash')
 
 module.exports = function(app) {
   
-  var users = [
-    { id: 1, username: 'bob', password: 'secret', email: 'bob@example.com' }
-  , { id: 2, username: 'joe', password: 'birthday', email: 'joe@example.com' }];
+   
+ // var users = [
+ //   { id: 1, username: 'bob', password: 'secret', email: 'bob@example.com' }
+ // , { id: 2, username: 'joe', password: 'birthday', email: 'joe@example.com' }];
 
 function findById(id, fn) {
-  var idx = id - 1;
-  if (users[idx]) {
-    fn(null, users[idx]);
-  } else {
-    fn(new Error('User ' + id + ' does not exist'));
-  }
+  User.findOne({ 'user.id': id }, 'user id', 
+    function (err, user) {
+      if (err) {return fn(null,null);}
+      console.log('user id is a %s.', user.id) // Space Ghost is a talk show host.
+      
+      fn(null, user);
+      });
 }
 
 function findByUsername(username, fn) {
-	console.log("looking for user" + username);
-  for (var i = 0, len = users.length; i < len; i++) {
-    var user = users[i];
-    if (user.username === username) {
-    console.log("found user. " + user.username);
-      return fn(null, user);
-    }
-  }
-  return fn(null, null);
+	User.findOne({ 'user.username': username }, 'user name', 
+    function (err, user) {
+      if (err) {return fn(null,null);}
+      console.log('username is a %s.', user.username) // Space Ghost is a talk show host.
+      
+      fn(null, user);
+      });
 }
 
 
@@ -93,66 +92,55 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 app.use(session({secret: 'supernova', saveUninitialized: true, resave: true}));
 app.use(passport.initialize());
 app.use(passport.session());
-  
-
-  // Initialize Passport!  Also use passport.session() middleware, to support
   // persistent login sessions (recommended).
-  app.use(flash());
+ app.use(flash());
 
   //app.use(app.router);
 
-
- 
-
-// POST /login
-//   Use passport.authenticate() as route middleware to authenticate the
-//   request.  If authentication fails, the user will be redirected back to the
-//   login page.  Otherwise, the primary route function function will be called,
-//   which, in this example, will redirect the user to the home page.
-//
-//   curl -v -d "username=bob&password=secret" http://127.0.0.1:3000/login
-/*
-app.post('/api/login', 
-  passport.authenticate('local', { failureFlash: true }),
-  function(req, res) {
-  	console.log("uuser authenticated. go to home page");
+  function addUser(req, res, next) {
+    
+    var user = req.body;
      
-  });
-  */
-// POST /login
-//   This is an alternative implementation that uses a custom callback to
-//   acheive the same functionality.
-
-app.post('/api/login', function(req, res, next) {
-  console.log("request body: " + JSON.stringify(req.body));
-
-  passport.authenticate('local', function(err, user, info) {
-    if (err) { return next(err) }
-    if (!user) {
-      req.flash('error', info.message);
-      //return res.redirect('/login')
-     // res.send("test: " + user);
-     console.log("no user. log in error");
-     return res.status(400).send('Current user does not exist');
-    }
-    req.logIn(user, function(err) {
-      if (err) { 
-        console.log("log in error");
-      	//res.send("err false");
-      	return next(err); 
+    User.addUser(user, function(err) {
+      if (err)
+      {
+        console.log(err);
       }
-      //return res.redirect('/users/' + user.username);
-      //res.send("true");
-       console.log("it logged in!");
-        return res.status(200).send('we are logged in');
     });
-  })(req, res, next);
-});
+    
+  };
+  
+ function loginUser(req, res, next) {
+    console.log("request body: " + JSON.stringify(req.body));
 
+    passport.authenticate('local', function(err, user, info) {
+      if (err) { return next(err) }
+      if (!user) {
+        req.flash('error', info.message);
+        //return res.redirect('/login')
+       // res.send("test: " + user);
+       console.log("no user. log in error");
+       return res.status(400).send('Current user does not exist');
+      }
+      req.logIn(user, function(err) {
+        if (err) { 
+          console.log("log in error");
+        	//res.send("err false");
+        	return next(err); 
+        }
+        //return res.redirect('/users/' + user.username);
+        //res.send("true");
+         console.log("it logged in!");
+          return res.status(200).send('we are logged in');
+      });
+    })(req, res, next);
+  };
 
-app.get('/api/logout', function(req, res){
-  req.logout();
-  res.redirect('/');
-});
+  app.get('/api/logout', function(req, res){
+    req.logout();
+    res.redirect('/');
+  });
  
+  app.post('/api/login', loginUser);
+  app.post('/api/user' , addUser);
 };

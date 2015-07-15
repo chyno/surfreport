@@ -1,5 +1,6 @@
 var R = require('ramda');
 var moment = require('moment');
+var security = require('../security');
 
 module.exports = function(app) {
     var api = '/api';
@@ -27,8 +28,8 @@ module.exports = function(app) {
            // app.get(api + '/loginCheck', getLogInCheck);
             app.get(api + '/readings', getReadings);
             app.get(api + '/latestreading', getLatestReading);
-
-             
+            //app.post(api + '/api/user' , addUser);
+           
 
            //sends the request through our local login/signin strategy, and if successful takes user to homepage, otherwise returns then to signin page
            /*
