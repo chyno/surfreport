@@ -12,8 +12,8 @@ export class App {
     config.addPipelineStep('authorize', AuthorizeStep);
     config.map([
       { route: ['','reading'],  moduleId: './Reading/reading',   nav: true, title:'Reading', auth: true, name:'reading'},
-      { route: 'login',      moduleId: './Login/login',     nav: true, title:'Login' },
-      { route: 'newuser',   moduleId: './Login/new-user',     nav: false, title:'New User', name:'newuser' }
+      { route: 'login', moduleId: './Login/login', nav: true, title:'Login',  auth: false, name:'login' },
+      { route: 'newuser',   moduleId: './Login/new-user',     nav: false, title:'New User', name:'newuser',  auth: false }
      
     ]);
 
