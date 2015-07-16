@@ -28,7 +28,7 @@ export class LoginData {
   logIn(username, password) {
      
        var user = createUser( username, password, '');
-     
+     //
        return this.http.post(baseUrl,user)
        			.then(function(response){
               user.zip = '22207';

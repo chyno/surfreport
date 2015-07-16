@@ -6,8 +6,9 @@ var outputRoot = 'client/dist/';
 module.exports = {
   root: appRoot,
   source: appRoot + '**/*.js',
+  serversource : 'server/**/*.js',
   html: appRoot + '**/*.html',
-  style: appRoot + 'styles/**/*.css',
+  style:  'client/styles/*.css',
   output: outputRoot,
   sourceMapRelativePath: '../' + appRoot,
   doc:'./doc',
