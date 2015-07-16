@@ -15,10 +15,14 @@ export class LoginData {
   	this.http = HttpClient.configure(x => { x.withHeader('Content-Type', 'application/json') });
   }
 
-  
+  getUserId()
+  {
+    return window.userid;
+  }
+
   isCurrentLoggedIn()
   {
-  	return !!window.isLoggedIn;
+  	return !!window.userid;
   }
 
   logIn(username, password) {
@@ -28,13 +32,16 @@ export class LoginData {
        return this.http.post(baseUrl,user)
        			.then(function(response){
               user.zip = '22207';
-       				console.log("response body: " + response.content);
-       				console.log("is isSuccess: " + response.isSuccess);
-       				
-              window.isLoggedIn = response.isSuccess;
+       				console.log("response body: " +  JSON.stringify(response.content));
+       			
+       				var newuser = response.content;
 
-              if (window.isLoggedIn)
-                {return user}
+              window.userid = newuser._id;
+
+              if (response.isSuccess)
+                {
+                    console.log("Success. Id is " + window.userid );
+                  return newuser}
               else
               {
                 return null;
@@ -45,7 +52,7 @@ export class LoginData {
 
   logOut()
   {
-     window.isLoggedIn = null;
+     window.userid = null;
   }
   
   signupUser(username, password, zip)

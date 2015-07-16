@@ -39,7 +39,7 @@ function findByUsername(username, fn) {
    User.findOne({username: username}, function(err, user) {
       if(err)
       {
-        return fn(null, null);
+        return fn("could not find user", null);
       }
       return fn(null, user);
    });
@@ -138,10 +138,9 @@ app.use(passport.session());
         	//res.send("err false");
         	return next(err); 
         }
-        //return res.redirect('/users/' + user.username);
-        //res.send("true");
-         console.log("it logged in!");
-          return res.status(200).send('we are logged in');
+        
+          console.log("it logged in!");
+          return res.status(200).send(user);
       });
     })(req, res, next);
   };
