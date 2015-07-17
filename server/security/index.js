@@ -14,7 +14,7 @@ var flash = require('connect-flash')
 // var   methodOverride = require('method-override');
 
 module.exports = function(app) {
-  
+ 
 function findById(id, fn) {
    var User =  mongoose.model('User');
    User.findById(User, function(err, user) {
@@ -89,14 +89,22 @@ app.use(passport.session());
   //app.use(app.router);
 
   function getUser(req, res, next) {
-    console.log("getting user");
-   var id = req.params.id;
+   console.log("...getting user");
+   
+   var id = req.query.userid;
+   //res.send(id);
+   //res.send(id);
    var ObjectId = mongoose.Types.ObjectId;
    var uid = new ObjectId(id);
-
-   return this.findById(uid, function(err, user) {
-        return user;
-     }); 
+   
+    var User =  mongoose.model('User');
+    return User.findById(uid, function(err, user) {
+      if(err)
+      {
+         res.send("error");
+      }
+      res.send(user);
+    });
   }
 
   function addUser(req, res, next) {
@@ -146,5 +154,5 @@ app.use(passport.session());
  
   app.post('/api/login', loginUser);
   app.post('/api/user' , addUser);
-  app.get('/api/user:id' , getUser);
+  app.get('/api/user' , getUser);
 };

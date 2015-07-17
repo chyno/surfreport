@@ -11,13 +11,15 @@ let createUser = function(username, password, zip)
 
 @inject (HttpClient)
 export class LoginData {
-  constructor(HttpClient) {
+  constructor(HttpClient, QS) {
+   
   	this.http = HttpClient.configure(x => { x.withHeader('Content-Type', 'application/json') });
   }
 
   getUser()
   {
-    return this.http.get(baseUrl + "/" + this.getUserId())
+    
+    return this.http.get(baseuserUrl + "?userid=" + this.getUserId())
             .then(function(response){
                return response.body;       
             });
@@ -42,13 +44,12 @@ export class LoginData {
        				console.log("response body: " +  JSON.stringify(response.content));
        			
        				var newuser = response.content;
-
               window.userid = newuser._id;
 
               if (response.isSuccess)
                 {
-                       console.log("Success. Id is " + window.userid );
-                  return newuser}
+                  console.log("Success. Id is " + window.userid );
+                  return newuser }
               else
               {
                 return null;

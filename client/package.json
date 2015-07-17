@@ -14,7 +14,9 @@
     "type": "git",
     "url": "http://github.com/aurelia/skeleton-navigation"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "querystring": "^0.2.0"
+  },
   "jspm": {
     "dependencies": {
       "aurelia-animator-css": "github:aurelia/animator-css@^0.3.0",

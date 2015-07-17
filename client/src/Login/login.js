@@ -7,22 +7,22 @@ let loggedInMessage = " is logged In";
 let notLoggedInMessage = "not logged In"
 let errorMessage = "Log In Failed";
 
-
-
 @inject(LoginData, Router)
-export class Login{
+export class Login {
   //{ id: 1, username: 'bob', password: 'secret', email: 'bob@example.com' }
     self = this;
-    username = '';
-    password = '';
+    
+   // router2 = { generate = function(foo, barr) { console.log("in dummy router.. :" + foo);}};
+    username = 'tester';
+    password = 'password';
     zip = '';
     isLoggedIn = false;
     loginmessage = notLoggedInMessage;
-  logIn(){
 
+  logIn(){
     this.loginData
     .logIn(this.username, this.password)
-    .then(this.setCurrentUser,this.errorGettingUser);                   
+    .then(this.gotoHome,this.errorGettingUser);                   
   }
 
   logOut(){
@@ -32,19 +32,19 @@ export class Login{
   }
 
   constructor(loginData, router){
+     
      this.loginData = loginData;
-     this.router = router
+     this.routerRedirect = router
   }
   
   activate(){ 
    
-          
-    if (this.loginData.isCurrentLoggedIn())
-    {
-      console.log("user logged in.  Get user data");
+  if (this.loginData.isCurrentLoggedIn())
+   {
+       console.log("user logged in.  Get user data");
        this.loginData
       .getUser()
-      .then(setCurrentUser,errorGettingUser);     
+      .then(this.setCurrentUser,this.errorGettingUser);     
       
        this.loginmessage =  this.username + loggedInMessage; 
     }
@@ -54,6 +54,13 @@ export class Login{
     }
   }
 
+  gotoHome(err, currentUser) {
+    //console.log("self router2 : " + self.router2);   
+   // let url = self.routerRedirect.generate("reading", {id: currentUser.zip});
+    
+   // console.log("navigating to: " + url)
+  //  self.routerRedirect.navigate(url);
+  }
 
   setCurrentUser(err, currentUser) 
   {
@@ -68,22 +75,19 @@ export class Login{
        //   console.log("navigating to: " + url);
           self.isLoggedIn = true;
          //  return self.router.navigate(url);
-
       }
       else
       {
-         console.log("not logged in");
+        console.log("not logged in");
         self.loginmessage = self.errorMessage; 
-         self.isLoggedIn = false;
+        self.isLoggedIn = false;
        // return;
       }
-
   };
 
   errorGettingUser(error) { 
-        console.log(error);
-        self.loginmessage = "can not log in user"; 
-       
-        self.loginmessage = 'exception';
-      };
+    console.log(error);
+    self.loginmessage = "can not log in user"; 
+    self.loginmessage = 'exception';
+  };
 }
