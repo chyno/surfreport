@@ -4,8 +4,6 @@ var logger = require('morgan'),
     methodOverride = require('method-override'),   
     session = require('express-session');
    var mongoose = require('mongoose');
-
-
   
 var flash = require('connect-flash')
   , express = require('express')
@@ -17,11 +15,6 @@ var flash = require('connect-flash')
 
 module.exports = function(app) {
   
-   
- // var users = [
- //   { id: 1, username: 'bob', password: 'secret', email: 'bob@example.com' }
- // , { id: 2, username: 'joe', password: 'birthday', email: 'joe@example.com' }];
-
 function findById(id, fn) {
    var User =  mongoose.model('User');
    User.findById(User, function(err, user) {
@@ -31,7 +24,6 @@ function findById(id, fn) {
       }
       return fn(null, user);
    });
-    
 }
 
 function findByUsername(username, fn) {
@@ -43,16 +35,9 @@ function findByUsername(username, fn) {
       }
       return fn(null, user);
    });
-    
-	 
 }
 
 
-// Passport session setup.
-//   To support persistent login sessions, Passport needs to be able to
-//   serialize users into and deserialize users out of the session.  Typically,
-//   this will be as simple as storing the user ID when serializing, and finding
-//   the user by ID when deserializing.
 passport.serializeUser(function(user, done) {
   console.log("user: " + user);
   done(null, user.id);
@@ -103,22 +88,31 @@ app.use(passport.session());
 
   //app.use(app.router);
 
+  function getUser(req, res, next) {
+    console.log("getting user");
+   var id = req.params.id;
+   var ObjectId = mongoose.Types.ObjectId;
+   var uid = new ObjectId(id);
+
+   return this.findById(uid, function(err, user) {
+        return user;
+     }); 
+  }
+
   function addUser(req, res, next) {
     var User =  mongoose.model('User');
     var user = new User(req.body);
-  
+
     user.save(function (err) {
-    if (err) {
-       req.flash('error', 'Sorry! We are not able to add user!');
-    }
-    else
-    {
-      return res.status(200).send('User created');
-    }
- 
-  });
-    
-  };
+      if (err) {
+         req.flash('error', 'Sorry! We are not able to add user!');
+      }
+      else
+      {
+        return res.status(200).send('User created');
+      }
+  }); 
+  }
   
  function loginUser(req, res, next) {
     console.log("request body: " + JSON.stringify(req.body));
@@ -152,4 +146,5 @@ app.use(passport.session());
  
   app.post('/api/login', loginUser);
   app.post('/api/user' , addUser);
+  app.get('/api/user:id' , getUser);
 };

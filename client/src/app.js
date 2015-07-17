@@ -45,11 +45,10 @@ class AuthorizeStep {
       }
       else
       {
-              console.log("redirecting to admin. aruelia authriize");
-              return next.cancel(new Redirect('login'));
+        console.log("redirecting to admin. aruelia authriize");
+        return next.cancel(new Redirect('login'));
       }       
      }
-
      return next();
   }
 }

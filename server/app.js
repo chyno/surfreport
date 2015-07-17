@@ -16,6 +16,7 @@ exports.StartServer = function() {
 
 	connect();
 	// Load models
+	 
 	var modelsdirectory = join(__dirname, 'models');
 	
 	fs.readdirSync(modelsdirectory).forEach(function (file) {

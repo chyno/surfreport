@@ -15,6 +15,14 @@ export class LoginData {
   	this.http = HttpClient.configure(x => { x.withHeader('Content-Type', 'application/json') });
   }
 
+  getUser()
+  {
+    return this.http.get(baseUrl + "/" + this.getUserId())
+            .then(function(response){
+               return response.body;       
+            });
+
+  }
   getUserId()
   {
     return window.userid;
@@ -26,10 +34,9 @@ export class LoginData {
   }
 
   logIn(username, password) {
-     
-       var user = createUser( username, password, '');
+    var user = createUser( username, password, '');
      //
-       return this.http.post(baseUrl,user)
+     return this.http.post(baseUrl,user)
        			.then(function(response){
               user.zip = '22207';
        				console.log("response body: " +  JSON.stringify(response.content));
@@ -40,7 +47,7 @@ export class LoginData {
 
               if (response.isSuccess)
                 {
-                    console.log("Success. Id is " + window.userid );
+                       console.log("Success. Id is " + window.userid );
                   return newuser}
               else
               {

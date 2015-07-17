@@ -18,7 +18,7 @@ gulp.task('watch', ['serverNode'], function() {
    gulp.watch(paths.source, ['build-system', browserSync.reload]).on('change', reportChange);
    gulp.watch(paths.html, ['build-html', browserSync.reload]).on('change', reportChange);
    gulp.watch(paths.style, ['build-html', browserSync.reload]).on('change', reportChange);
-   gulp.watch(paths.serversource, ['serve', browserSync.reload]).on('change', reportChange);
+  // gulp.watch(paths.serversource, ['serve', browserSync.reload]).on('change', reportChange);
 
  // gulp.watch("client/src/styles/*.css").on("change", browserSync.reload);
   //gulp.watch("client/src/styles/*.css", browserSync.reload).on('change', reportChange);
