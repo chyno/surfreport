@@ -10,7 +10,7 @@ let errorMessage = "Log In Failed";
 @inject(LoginData, Router)
 export class Login {
   //{ id: 1, username: 'bob', password: 'secret', email: 'bob@example.com' }
-    self = this;
+   
     
    // router2 = { generate = function(foo, barr) { console.log("in dummy router.. :" + foo);}};
     username = 'tester';
@@ -20,9 +20,15 @@ export class Login {
     loginmessage = notLoggedInMessage;
 
   logIn(){
+    var self = this;
     this.loginData
     .logIn(this.username, this.password)
-    .then(this.gotoHome,this.errorGettingUser);                   
+    .then(function(err, currentUser) {
+          console.log("response body: " +  JSON.stringify(currentUser));
+
+         let url = self.routerRedirect.generate("reading", {id: currentUser.zip});
+         self.routerRedirect.navigate(url);
+    },this.errorGettingUser);                   
   }
 
   logOut(){
@@ -38,13 +44,35 @@ export class Login {
   }
   
   activate(){ 
-   
+   var self = this;
+
   if (this.loginData.isCurrentLoggedIn())
    {
        console.log("user logged in.  Get user data");
        this.loginData
       .getUser()
-      .then(this.setCurrentUser,this.errorGettingUser);     
+      .then(
+        function (err, currentUser) 
+        {
+          self.loginmessage = self.loggingInMessage;
+          console.log("setting  current user.");
+          if (currentUser)
+          {     
+            console.log("is logged in");
+            self.zip = currentUser.zip; 
+            self.loginmessage =  self.username + loggedInMessage;
+            self.isLoggedIn = true;
+         //  return self.router.navigate(url);
+          }
+          else
+          {
+            console.log("not logged in");
+            self.loginmessage = self.errorMessage; 
+            self.isLoggedIn = false;
+       // return;
+          }
+      },this.errorGettingUser);
+
       
        this.loginmessage =  this.username + loggedInMessage; 
     }
@@ -54,13 +82,7 @@ export class Login {
     }
   }
 
-  gotoHome(err, currentUser) {
-    //console.log("self router2 : " + self.router2);   
-   // let url = self.routerRedirect.generate("reading", {id: currentUser.zip});
-    
-   // console.log("navigating to: " + url)
-  //  self.routerRedirect.navigate(url);
-  }
+  
 
   setCurrentUser(err, currentUser) 
   {
@@ -71,8 +93,7 @@ export class Login {
            console.log("is logged in");
           self.zip = currentUser.zip; 
           self.loginmessage =  self.username + loggedInMessage;
-        //  let url = self.router.generate("reading", {id: currentUser.zip});
-       //   console.log("navigating to: " + url);
+       
           self.isLoggedIn = true;
          //  return self.router.navigate(url);
       }

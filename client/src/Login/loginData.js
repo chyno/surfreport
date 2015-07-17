@@ -40,7 +40,7 @@ export class LoginData {
      //
      return this.http.post(baseUrl,user)
        			.then(function(response){
-              user.zip = '22207';
+              
        				console.log("response body: " +  JSON.stringify(response.content));
        			
        				var newuser = response.content;
