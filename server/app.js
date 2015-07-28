@@ -13,7 +13,7 @@ var connect = function () {
 };
 
 exports.StartServer = function() {
-
+  	console.log("start server ");
 	connect();
 	// Load models
 	 
